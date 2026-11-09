@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+<style>
+    body {
+        background: linear-gradient(135deg, #ffd6e7, #fff0f5);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 100px;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+h1 {
+    color: #d94f87;
+    font-size: 32px;
+}
+p {
+    color: #a64d79;
+    font-size: 20px;
+}
+button {
+    background-color: #ff85b3;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #e75491;
+    transform: scale(1.08);
+}
+.card {
+    position: relative;
+    background: white;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px 25px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(220, 100, 150, 0.2);
+}
+.card::before {
+    content: "🎀";
+    font-size: 35px;
+    position: absolute;
+    top: -22px;
+    right: 20px;
+}
+.card::after {
+    content: "♡";
+    color: #ff85b3;
+    font-size: 35px;
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+}
+.heart {
+    position: fixed;
+    bottom: -50px;
+    color: #e75491;
+    font-size: 25px;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+</style>
+    <title>Мой первый сайт</title>
+</head>
+<body>
+<div class="heart" style="left: 10%; animation-delay: 0s;">♡</div>
+<div class="heart" style="left: 30%; animation-delay: 2s;">♥</div>
+<div class="heart" style="left: 70%; animation-delay: 1s;">♡</div>
+<div class="heart" style="left: 90%; animation-delay: 3s;">♥</div>
+<div class="card">
+    <h1>Привет, подруга!</h1>
+    <p>У меня к тебе есть один вопросик...</p>
+    <button onclick="showQuestion()">Нажми сюда ♡</button>
+
+    <script>
+        function showQuestion() {
+            document.querySelector("h1").textContent = "Ты кушаешь какашки?";
+            document.querySelector("p").textContent = "Отвечай честно!";
+            document.querySelector("button").style.display = "none";
+            let newButtons = document.createElement("div");
+            newButtons.innerHTML = `
+            <button onclick="answerYes()">Да</button>
+            <button onclick="answerNo()">Нет</button>
+`;
+document.body.appendChild(newButtons);
+        }
+function answerYes() {
+    document.body.innerHTML = `
+    <h1>АХАХАХА, ПОПАЛАСЬ!</h1>
+    <p style="font-size: 80px;">💩</p>
+    <p>Это тебе!</p>
+    <button onclick="alert('Пожалуйста!')">
+        Спасибо
+        </button>
+    `;
+}
+let noCount = 0;
+function answerNo() {
+    let questions = [
+         "Точно?",
+         "А может все-таки да?",
+         "Не стесняйся, признавайся!",
+         "Я тебе не верю...",
+         "Последний шанс подумать!",
+         "НАЖМИ ДА УЖЕ"
+    ];
+    let index = Math.min(noCount, questions.length - 1);
+    document.querySelector("p").textContent = questions[index];
+    noCount++;
+}
+</script>
+</div>
+</body>
+</html>
